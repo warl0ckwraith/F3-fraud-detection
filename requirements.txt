@@ -1,0 +1,17 @@
+# Core ML frameworks
+torch>=2.0.0
+torch-geometric>=2.3.0
+
+# Data processing and metrics
+numpy>=1.24.0
+pandas>=2.0.0  # For IEEE-CIS dataset loading
+scikit-learn>=1.3.0
+
+# Configuration
+pyyaml>=6.0
+
+# Optional but recommended for development
+tqdm>=4.65.0  # Progress bars
+matplotlib>=3.7.0  # Plotting
+seaborn>=0.12.0  # Enhanced plotting
+

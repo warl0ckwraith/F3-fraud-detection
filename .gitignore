@@ -1,0 +1,9 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Experiment outputs
+runs/
+
+# Jupyter
+.ipynb_checkpoints/
