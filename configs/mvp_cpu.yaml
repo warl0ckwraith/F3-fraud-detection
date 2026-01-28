@@ -1,0 +1,62 @@
+seed: 42
+device: cpu
+
+data:
+  num_users: 300
+  num_merchants: 150
+  num_devices: 200
+  num_transactions: 8000
+  fraud_ratio: 0.03
+  seq_len: 10
+  batch_size: 128
+  val_split: 0.15
+  test_split: 0.15
+  split_strategy: time
+  base_timestamp: 1700000000
+  # dataset_path: data/synthetic/mvp_v1.jsonl  # uncomment to use saved dataset
+
+model:
+  use_graph: false
+  sequence_encoder:
+    input_size: 2
+    hidden_size: 32
+    num_layers: 1
+    bidirectional: false
+    dropout: 0.0
+  graph_encoder:
+    out_dim: 32
+    hidden_dim: 32
+    num_layers: 2
+    heads: 2
+    temporal_dim: 8
+    dropout: 0.1
+    time_attr: timestamp
+  fusion_head:
+    hidden_dims: [64, 32]
+    dropout: 0.1
+
+optim:
+  lr: 0.001
+  weight_decay: 0.00001
+  epochs: 5
+  lr_schedule:
+    enabled: false
+    factor: 0.5
+    patience: 3
+  early_stopping:
+    enabled: false
+    patience: 5
+    min_delta: 1e-6
+
+loss:
+  weighting: var
+  alpha: 0.95
+  lambda_risk: 1.0
+
+metrics:
+  recall_at: 0.05
+
+results:
+  enabled: true
+  dir: runs
+  name: mvp_cpu

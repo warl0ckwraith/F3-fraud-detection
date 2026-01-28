@@ -1,0 +1,10 @@
+{
+  "out": "data/synthetic/mvp_v1.jsonl",
+  "seed": 42,
+  "num_users": 300,
+  "num_merchants": 150,
+  "num_devices": 200,
+  "num_transactions": 8000,
+  "fraud_ratio": 0.03,
+  "generated_at": "2026-01-27T11:55:23"
+}

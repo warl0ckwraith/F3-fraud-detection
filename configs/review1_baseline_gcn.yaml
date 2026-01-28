@@ -1,0 +1,51 @@
+seed: 42
+device: auto
+
+data:
+  num_users: 300
+  num_merchants: 150
+  num_devices: 200
+  num_transactions: 8000
+  fraud_ratio: 0.03
+  seq_len: 10
+  batch_size: 256
+  val_split: 0.15
+  test_split: 0.15
+  split_strategy: time
+  base_timestamp: 1700000000
+
+model:
+  architecture: baseline_gnn
+  use_graph: true
+  baseline:
+    gnn_type: GCN
+    input_dim: 3
+    hidden_dim: 64
+    num_layers: 2
+    output_dim: 64
+    heads: 4
+    dropout: 0.1
+    classifier_hidden_dims: [64]
+    target_node_type: transaction
+
+optim:
+  lr: 0.001
+  weight_decay: 0.00001
+  epochs: 8
+  lr_schedule:
+    enabled: false
+  early_stopping:
+    enabled: false
+
+loss:
+  weighting: var
+  alpha: 0.95
+  lambda_risk: 1.0
+
+metrics:
+  recall_at: 0.05
+
+results:
+  enabled: true
+  dir: runs
+  name: review1_baseline_gcn

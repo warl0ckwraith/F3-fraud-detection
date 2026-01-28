@@ -1,0 +1,56 @@
+seed: 42
+device: auto  # 'auto' picks CUDA if available, else CPU
+
+data:
+  num_users: 1000
+  num_merchants: 500
+  num_devices: 800
+  num_transactions: 50000
+  fraud_ratio: 0.02
+  seq_len: 10
+  batch_size: 256
+  val_split: 0.15
+  test_split: 0.15
+  base_timestamp: 1700000000
+
+model:
+  use_graph: false  # set to true to enable graph encoder
+  sequence_encoder:
+    input_size: 2       # [log1p(amount), delta_hours]
+    hidden_size: 64
+    num_layers: 1
+    bidirectional: false
+    dropout: 0.0
+  graph_encoder:
+    out_dim: 64
+    hidden_dim: 64
+    num_layers: 2
+    heads: 4
+    temporal_dim: 16
+    dropout: 0.1
+    time_attr: timestamp
+  fusion_head:
+    hidden_dims: [128, 64]
+    dropout: 0.1
+
+optim:
+  lr: 0.001
+  weight_decay: 0.00001
+  epochs: 10
+  lr_schedule:
+    enabled: false
+    factor: 0.5
+    patience: 3
+  early_stopping:
+    enabled: false
+    patience: 5
+    min_delta: 1e-6
+
+loss:
+  weighting: var   # ['none', 'var', 'es']
+  alpha: 0.95
+  lambda_risk: 1.0
+
+metrics:
+  recall_at: 0.03  # top 3%
+

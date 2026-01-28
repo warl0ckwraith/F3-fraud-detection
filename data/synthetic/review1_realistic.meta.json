@@ -1,0 +1,12 @@
+{
+  "out": "data/synthetic/review1_realistic.jsonl",
+  "seed": 42,
+  "num_users": 300,
+  "num_merchants": 150,
+  "num_devices": 200,
+  "num_transactions": 8000,
+  "fraud_ratio": 0.03,
+  "base_timestamp": 1700000000,
+  "synthetic_profile": null,
+  "generated_at": "2026-01-27T13:16:02"
+}

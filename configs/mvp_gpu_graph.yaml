@@ -1,0 +1,56 @@
+seed: 42
+device: auto
+
+data:
+  dataset_path: data/synthetic/mvp_v1.jsonl
+  seq_len: 10
+  batch_size: 256
+  val_split: 0.15
+  test_split: 0.15
+  split_strategy: time
+
+model:
+  use_graph: true
+  sequence_encoder:
+    input_size: 2
+    hidden_size: 64
+    num_layers: 1
+    bidirectional: false
+    dropout: 0.0
+  graph_encoder:
+    out_dim: 64
+    hidden_dim: 64
+    num_layers: 2
+    heads: 4
+    temporal_dim: 16
+    dropout: 0.1
+    time_attr: timestamp
+  fusion_head:
+    hidden_dims: [128, 64]
+    dropout: 0.1
+
+optim:
+  lr: 0.001
+  weight_decay: 0.00001
+  epochs: 10
+  lr_schedule:
+    enabled: false
+    factor: 0.5
+    patience: 3
+  early_stopping:
+    enabled: false
+    patience: 5
+    min_delta: 1e-6
+
+loss:
+  weighting: var
+  alpha: 0.95
+  lambda_risk: 1.0
+
+metrics:
+  recall_at: 0.05
+
+results:
+  enabled: true
+  dir: runs
+  name: mvp_gpu_graph
